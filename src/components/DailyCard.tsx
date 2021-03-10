@@ -60,6 +60,7 @@ const DailyCard = (props: Props) => {
 
   const goToDetail = () => {
     Router.push('/daily/detail/[id]', `/daily/detail/${props.id}`)
+    // Router.push('/daily/detail/[id]', `/daily/detail/${props.id}`)
   }
 
   const goToEdit = () => {

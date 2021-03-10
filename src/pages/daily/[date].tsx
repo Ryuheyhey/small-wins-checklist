@@ -1,7 +1,7 @@
 import MainLayout from "../../layout"
 import {DailyCard, TextLine, EditIconButton} from "../../components/index"
 import fetch from "node-fetch"
-import { GetStaticPaths, GetStaticProps } from "next"
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next"
 import { useCallback } from "react"
 import Router, { useRouter } from "next/router"
 import Link from "next/link"
@@ -81,24 +81,24 @@ const index = (props: Props) => {
 
 export default index
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch('http://127.0.0.1:3000/index/get')
-  const posts = await res.json()
-  const paths = posts.map(post => ({
-      params: {
-        date: post.created.slice(0, 10)
-      }
-    }))
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   const res = await fetch('http://0.0.0.0:3000/index/get')
+//   const posts = await res.json()
+//   const paths = posts.map(post => ({
+//       params: {
+//         date: post.created.slice(0, 10)
+//       }
+//     }))
 
-    return {
-      paths,
-      fallback: true,
-    }
-}
+//     return {
+//       paths,
+//       fallback: true,
+//     }
+// }
 
-export const getStaticProps: GetStaticProps = async ({params}) => {
+export const getServerSideProps: GetServerSideProps = async ({params}) => {
   const date = params.date
-  const res = await fetch(`http://127.0.0.1:3000/daily/get/${date}`)
+  const res = await fetch(`http://0.0.0.0:3000/daily/get/${date}`)
   const posts = await res.json()
   return {
     props: {

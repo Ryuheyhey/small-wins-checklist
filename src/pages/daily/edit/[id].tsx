@@ -2,7 +2,7 @@ import MainLayout from "../../../layout"
 import {TextLine, DailyText, PrimaryButton, GreyButton} from "../../../components/index"
 import styles from "../../../styles/Home.module.css"
 import Router from "next/router"
-import { GetStaticPaths, GetStaticProps } from "next"
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next"
 import fetch from "node-fetch"
 import {useState, useCallback} from "react"
 
@@ -165,25 +165,25 @@ const DailyEdit = ({post}: Post) => {
 
 export default DailyEdit
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch('http://127.0.0.1:3000/index/get')
-  const posts = await res.json()
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   const res = await fetch('http://127.0.0.1:3000/index/get')
+//   const posts = await res.json()
 
-  const paths = posts.map(post => ({
-    params: {
-      id: post._id
-    }
-  }))
+//   const paths = posts.map(post => ({
+//     params: {
+//       id: post._id
+//     }
+//   }))
 
-  return {
-    paths,
-    fallback: false,
-  }
-}
+//   return {
+//     paths,
+//     fallback: false,
+//   }
+// }
 
-export const getStaticProps: GetStaticProps = async ({params}) => {
+export const getServerSideProps: GetServerSideProps = async ({params}) => {
   const id = params.id
-  const res = await fetch(`http://127.0.0.1:3000/detail/get/${id}`)
+  const res = await fetch(`http://0.0.0.0:3000/detail/get/${id}`)
   const post = await res.json()
 
   return {

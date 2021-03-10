@@ -59,7 +59,7 @@ const index = (props: Props) => {
 export default index
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch('http://127.0.0.1:3000/index/get')
+  const res = await fetch('http://0.0.0.0:3000/index/get')
   const posts = await res.json()
   return {
     props: {
@@ -67,3 +67,12 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   }
 }
+// export const getStaticProps: GetStaticProps = async () => {
+//   const res = await fetch('http://127.0.0.1:3000/index/get')
+//   const posts = await res.json()
+//   return {
+//     props: {
+//       posts
+//     }
+//   }
+// }
